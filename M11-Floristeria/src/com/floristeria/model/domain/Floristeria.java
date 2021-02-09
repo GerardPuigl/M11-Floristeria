@@ -21,7 +21,7 @@ public class Floristeria {
 	public void addFlower(String name, String color, double price) {
 
 		id++;
-		
+
 		Flower flower = new Flower(id, name, color, price);
 		productList.add(flower);
 
