@@ -5,10 +5,16 @@ import java.util.List;
 
 public class Floristeria {
 
+	private String name;
+	
 	private int id=0;
 	
 	private List<Producte> productList = new ArrayList<>();
 	
+	public Floristeria(String name) {
+		this.name = name;
+	}
+
 	public void addTree(String name, double height, double price) {
 
 		id++;
