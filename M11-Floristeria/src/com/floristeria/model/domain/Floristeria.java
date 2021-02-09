@@ -42,7 +42,7 @@ public class Floristeria {
 			productList.add(decoration);
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage() + "\nDecoració no afegida.");
+			System.out.println(e.getMessage() + "\nDecoraci� no afegida.");
 		}
 
 	}
@@ -61,7 +61,7 @@ public class Floristeria {
 			.filter(p->p.getClass().getSimpleName().equals("Flower"))
 			.forEach(p->System.out.println(p.toString()));
 		
-		System.out.println("DECORACIÓ:");
+		System.out.println("DECORACIӓ:");
 		
 		productList.stream()
 			.filter(p->p.getClass().getSimpleName().equals("Decoration"))

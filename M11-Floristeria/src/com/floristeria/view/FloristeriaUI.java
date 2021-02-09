@@ -59,15 +59,15 @@ public class FloristeriaUI {
 			case 5:
 				// Sortir del menú
 				System.out.println("Sortir del programa");
-				exit = false;
+				exit = true;
 				break;
 			default:
 				// Tornar al menú
 				System.out.println("\nLa resposta no és vàlida. Torna-ho a provar.");
-				exit = true;
+				exit = false;
 				break;
 			}
-		}while(exit);
+		}while(!exit);
 	}
 	
 	private Floristeria floristeriaCreate() {
@@ -77,11 +77,12 @@ public class FloristeriaUI {
 		try {			
 			String nomFloristeria = ask("Nom floristeria", "Introdueix el nom de la floristeria");
 			
-			floristeria floristeriaController.createFloristeria(nomFloristeria);
+			floristeria = floristeriaController.createFloristeria(nomFloristeria);
 			
 		}catch(Exception e) {
 			System.err.println("No s'ha pogut crear la floristeria");
 		}
+		return floristeria;
 	}
 	
 	private void askTreeAdd(Floristeria floristeria) {

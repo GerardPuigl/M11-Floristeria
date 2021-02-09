@@ -37,7 +37,7 @@ public class Tree extends Producte {
 	
 	@Override
 	public String toString() {
-		return "	NOM: " + name + "	ALÇADA: " + hight + "	PREU: " + price ;
+		return "	NOM: " + name + "	ALǇADA: " + hight + "	PREU: " + price ;
 		
 	}
 
