@@ -16,12 +16,12 @@ public class Decoration extends Producte {
 		super();
 		this.id = id;
 		this.name = name;
-		if(	type.equalsIgnoreCase(Types.Fusta.toString())&&
+		if(	type.equalsIgnoreCase(Types.Fusta.toString())||
 			type.equalsIgnoreCase(Types.Plastic.toString())){
 			this.type = type;
 		}else {
-			throw new Exception("La decoraciÃ³ nomÃ©s pot ser de Fusta o de Plastic");
-		}
+			throw new Exception("La decoració només pot ser de Fusta o de Plàstic");
+		} 
 		this.price = price;
 	}
 
