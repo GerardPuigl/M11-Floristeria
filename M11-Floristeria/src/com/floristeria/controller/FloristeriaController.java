@@ -4,20 +4,20 @@ import com.floristeria.model.domain.Floristeria;
 
 public class FloristeriaController {
 
-	public Floristeria createFloristeria(String nomFloristeria) {
+	public Floristeria createFloristeria(String nomFloristeria) throws Exception {
 		Floristeria floristeria = new Floristeria(nomFloristeria);
 		return floristeria;
 	}
 	
-	public void treeAdd(Floristeria floristeria, String name, double height, double price) {
+	public void treeAdd(Floristeria floristeria, String name, double height, double price) throws Exception {
 		floristeria.addTree(name, height, price);
 	}
 	
-	public void flowerAdd(Floristeria floristeria, String name, String color, double price) {
+	public void flowerAdd(Floristeria floristeria, String name, String color, double price) throws Exception {
 		floristeria.addFlower(name, color, price);
 	}
 	
-	public void decorationAdd(Floristeria floristeria, String name, String type, double price) {
+	public void decorationAdd(Floristeria floristeria, String name, String type, double price) throws Exception {
 		floristeria.addDecoration(name, type, price);
 	}
 	
@@ -34,6 +34,6 @@ public class FloristeriaController {
 	}
 	
 	public void getStockValue(Floristeria floristeria) {
-		floristaria.totalStockValue();
+		floristeria.totalStockValue();
 	}
 }
