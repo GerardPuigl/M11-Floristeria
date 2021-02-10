@@ -1,6 +1,8 @@
 package com.floristeria.model.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.floristeria.model.service.FloristeriaRepository;
 
@@ -58,7 +60,17 @@ public class Floristeria {
 	}
 	
 	public void printStock() {
+	
+		//recorre el llistat i caputura una llista dels tipus de Classes que hi ha pressents.
+		List<String> productTypes = floristeriaRepository.getAllProducts()
+				.stream().map(p->p.getClass().getSimpleName())
+				.distinct()
+				.collect(Collectors.toList());
 		
+		//imprimeix una llista per cada tipus trobat
+		productTypes.stream().forEach(s->printStock(s));
+		
+		/*
 		List<Producte> productList = floristeriaRepository.getAllProducts();
 		
 		System.out.println("ARBRES:");
@@ -78,8 +90,20 @@ public class Floristeria {
 		productList.stream()
 			.filter(p->p.getClass().getSimpleName().equals("Decoration"))
 			.forEach(p->System.out.println(p.toString()));
-		
+		*/
 	}
+	
+	//imprimeix una llista d'un producte concret	
+	public void printStock(String product) {
+		
+		System.out.println("TOTAL " + product.toUpperCase()+": ");
+				
+		floristeriaRepository.getAllProducts().stream()
+			.filter(p->p.getClass().getSimpleName().equals(product))
+			.forEach(p->System.out.println(p.toString()));
+			
+	}
+	
 	public void stockQuantities() {
 		
 		List<Producte> productList = floristeriaRepository.getAllProducts();

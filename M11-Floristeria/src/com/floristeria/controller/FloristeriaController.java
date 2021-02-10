@@ -6,24 +6,45 @@ public class FloristeriaController {
 
 	public Floristeria createFloristeria(String nomFloristeria) {
 		
-		Floristeria floristeria = new Floristeria(nomFloristeria);
+		Floristeria floristeria = null;
+		try {
+			floristeria = new Floristeria(nomFloristeria);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return floristeria;
 	}
 	
 	public void treeAdd(Floristeria floristeria, String name, double height, double price) {
 		
-		floristeria.addTree(name, height, price);
+		try {
+			floristeria.addTree(name, height, price);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void flowerAdd(Floristeria floristeria, String name, String color, double price) {
 		
-		floristeria.addFlower(name, color, price);
+		try {
+			floristeria.addFlower(name, color, price);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void decorationAdd(Floristeria floristeria, String name, String type, double price) {
 		
-		floristeria.addDecoration(name, type, price);
+		try {
+			floristeria.addDecoration(name, type, price);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }
