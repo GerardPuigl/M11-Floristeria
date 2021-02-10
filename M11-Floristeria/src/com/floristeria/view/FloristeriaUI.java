@@ -15,54 +15,156 @@ public class FloristeriaUI {
 
 	public void menu() {
 		
-		// Demanem les dades de l'periodista amb el que treballarem
 		Floristeria floristeria = floristeriaCreate();		
 		
 		// Menú de l'aplicació
-		boolean exit;
+		boolean exit = false;
 		int option;
 		
 		do {			
 			try {
-				// Comprovar que la resposta és int
 				option = Integer.parseInt(ask("Menú", "Tria una opció:"
-															+ "\n1. Afegir arbre"
-															+ "\n2. Afegir flor"
-															+ "\n3. Afegir decoració"
-															+ "\n4. Veure stock"
-															+ "\n5. Sortir"));
-			} catch (NumberFormatException e){
+														+ "\n1. Afegir producte"
+														+ "\n2. Retirar producte"
+														+ "\n3. Veure stock dels productes"
+														+ "\n4. Veure el valor total dels productes"
+														+ "\n5. Sortir"));
+			}catch(Exception e){
+				System.err.println("La resposta ha de ser un número");
 				option = 0;
+				exit = false;
+			}
+
+			if(option == 1) {
+				menuAdd(floristeria);
+				exit = false;
+			}else if(option == 2) {
+				menuRemove(floristeria);
+				exit = false;
+			}else if(option == 3) {
+				menuStock(floristeria);
+				exit = false;
+			}else if(option == 4) {
+					
+				exit = false;
+			}else if(option == 5) {
+					
+				exit = true;
+			}else if(option == JOptionPane.CANCEL_OPTION) {
 				exit = true;
 			}
-				
-			switch(option) {
-			case 1:
+			
+		}while(!exit);
+	}
+	
+	private void menuAdd(Floristeria floristeria) {
+		
+		boolean exit = false;
+		int option;
+		
+		do {			
+			try {
+				option = Integer.parseInt(ask("Menú", "Tria una opció:"
+														+ "\n1. Afegir arbre"
+														+ "\n2. Afegir flor"
+														+ "\n3. Afegir decoració"
+														+ "\n4. Sortir"));
+			}catch(Exception e){
+				System.err.println("La resposta ha de ser un número");
+				option = 0;
+				exit = false;
+			}
+			
+			if(option == 1) {
 				askTreeAdd(floristeria);
 				exit = false;
-				break;
-			case 2:
+			}else if(option == 2) {
 				askFlowerAdd(floristeria);
 				exit = false;
-				break;
-			case 3:
+			}else if(option == 3) {
 				askDecorationAdd(floristeria);
 				exit = false;
-				break;
-			case 4:
-				floristeria.printStock();
-				exit = false;
-				break;
-			case 5:
-				// Sortir del menú
-				System.out.println("Sortir del programa");
+			}else if(option == 4) {
 				exit = true;
-				break;
-			default:
-				// Tornar al menú
-				System.out.println("\nLa resposta no és vàlida. Torna-ho a provar.");
+			}else if(option == JOptionPane.CANCEL_OPTION) {
+				exit = true;
+			}
+		}while(!exit);
+	}
+	
+	private void menuRemove(Floristeria floristeria) {
+
+		boolean exit = false;
+		int option;
+		
+		do {			
+			try {
+				option = Integer.parseInt(ask("Menú", "Tria una opció:"
+														+ "\n1. Retirar arbre"
+														+ "\n2. Retirar flor"
+														+ "\n3. Retirar decoració"
+														+ "\n4. Sortir"));
+			}catch(Exception e){
+				System.err.println("La resposta ha de ser un número");
+				option = 0;
 				exit = false;
-				break;
+			}
+			
+			if(option == 1) {
+				floristeriaController.getProductStock(floristeria, "Tree");
+				askProductRemove(floristeria);
+				exit = false;
+			}else if(option == 2) {
+				floristeriaController.getProductStock(floristeria, "Flower");
+				askProductRemove(floristeria);
+				exit = false;
+			}else if(option == 3) {
+				floristeriaController.getProductStock(floristeria, "Decoration");
+				askProductRemove(floristeria);
+				exit = false;
+			}else if(option == 4) {
+				exit = true;
+			}else if(option == JOptionPane.CANCEL_OPTION) {
+				exit = true;
+			}
+		}while(!exit);
+	}
+	
+	private void menuStock(Floristeria floristeria) {
+
+		boolean exit = false;
+		int option;
+		
+		do {			
+			try {
+				option = Integer.parseInt(ask("Menú", "Tria una opció:"
+														+ "\n1. Veure stock d'arbres"
+														+ "\n2. Veure stock de flors"
+														+ "\n3. Veure stock de decoració"
+														+ "\n4. Veure stock de tots els productes"
+														+ "\n5. Sortir"));
+			}catch(Exception e){
+				System.err.println("La resposta ha de ser un número");
+				option = 0;
+				exit = false;
+			}
+			
+			if(option == 1) {
+				floristeriaController.getProductStock(floristeria, "Tree");
+				exit = false;
+			}else if(option == 2) {
+				floristeriaController.getProductStock(floristeria, "Flower");
+				exit = false;
+			}else if(option == 3) {
+				floristeriaController.getProductStock(floristeria, "Decoration");
+				exit = false;
+			}else if(option == 4) {
+				floristeriaController.getAllProductsStock(floristeria);
+				exit = false;
+			}else if(option == 5) {
+				exit = true;
+			}else if(option == JOptionPane.CANCEL_OPTION) {
+				exit = true;
 			}
 		}while(!exit);
 	}
@@ -115,6 +217,16 @@ public class FloristeriaUI {
 			floristeriaController.decorationAdd(floristeria, decorationName, decorationType, decorationPrice);
 		}catch(Exception e) {
 			System.err.println("No s'ha pogut afegir la decoració");
+		}
+	}
+	
+	private void askProductRemove(Floristeria floristeria) {
+		try {
+			int productId = Integer.parseInt(ask("ID Producte", "Introdueix l'ID del producte a eliminar"));
+			
+			floristeriaController.productRemove(floristeria, productId);
+		}catch(Exception e) {
+			System.err.println("No s'ha pogut retirar el producte");
 		}
 	}
 	
