@@ -2,7 +2,6 @@ package com.floristeria.model.domain;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import com.floristeria.model.service.FloristeriaRepository;
 
@@ -69,34 +68,29 @@ public class Floristeria {
 		
 		//imprimeix una llista per cada tipus trobat
 		productTypes.stream().forEach(s->printStock(s));
-		
-		/*
-		List<Producte> productList = floristeriaRepository.getAllProducts();
-		
-		System.out.println("ARBRES:");
-		
-		productList.stream()
-			.filter(p->p.getClass().getSimpleName().equals("Tree"))
-			.forEach(p->System.out.println(p.toString()));
-			
-		System.out.println("FLORS:");
-		
-		productList.stream()
-			.filter(p->p.getClass().getSimpleName().equals("Flower"))
-			.forEach(p->System.out.println(p.toString()));
-		
-		System.out.println("DECORACIONS“:");
-		
-		productList.stream()
-			.filter(p->p.getClass().getSimpleName().equals("Decoration"))
-			.forEach(p->System.out.println(p.toString()));
-		*/
+
 	}
 	
 	//imprimeix una llista d'un producte concret	
 	public void printStock(String product) {
 		
-		System.out.println("TOTAL " + product.toUpperCase()+": ");
+		//defineix el títol del llistat en funció del producte
+		String tipus = "";
+
+		switch (product) {
+		case "Tree":
+			tipus = "ARBRES";
+			break;
+		case "Flower":
+			tipus = "FLORS";
+			break;
+		case "Decoration":
+			tipus = "DECORACIONS";
+			break;
+		}
+
+		//imprimeix el llistat
+		System.out.println("TOTAL " + tipus + ": ");
 				
 		floristeriaRepository.getAllProducts().stream()
 			.filter(p->p.getClass().getSimpleName().equals(product))
