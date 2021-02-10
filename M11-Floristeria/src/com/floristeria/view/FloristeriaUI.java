@@ -45,10 +45,10 @@ public class FloristeriaUI {
 				menuStock(floristeria);
 				exit = false;
 			}else if(option == 4) {
-					
+				floristeriaController.getStockValue(floristeria);
 				exit = false;
 			}else if(option == 5) {
-					
+				System.out.println("Final de l'aplicació");
 				exit = true;
 			}else if(option == JOptionPane.CANCEL_OPTION) {
 				exit = true;
