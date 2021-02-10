@@ -16,10 +16,7 @@ public class FloristeriaUI {
 	public void menu() {
 		
 		// Demanem les dades de l'periodista amb el que treballarem
-		Floristeria floristeria = floristeriaCreate();
-
-		//if (floristeria != null) {
-		
+		Floristeria floristeria = floristeriaCreate();		
 		
 		// Menú de l'aplicació
 		boolean exit;
