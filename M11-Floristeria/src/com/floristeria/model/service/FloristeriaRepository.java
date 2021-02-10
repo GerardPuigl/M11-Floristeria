@@ -16,8 +16,8 @@ public class FloristeriaRepository {
 			return productList;
 		}
 				
-		public void addProducte(Producte producte) {
-			//if(producte==null) throw new Exception();
+		public void addProducte(Producte producte) throws Exception {
+			if(producte==null) throw new Exception();
 			productList.add(producte);
 		}
 

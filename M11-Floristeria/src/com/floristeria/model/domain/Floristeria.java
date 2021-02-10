@@ -11,8 +11,6 @@ public class Floristeria {
 
 	private String name;
 
-	//private List<Producte> productList = new ArrayList<>();
-
 	private FloristeriaRepository floristeriaRepository=new FloristeriaRepository();
 	
 	public Floristeria(String name) throws Exception {
@@ -31,19 +29,17 @@ public class Floristeria {
 		return name;
 	}	
 
-	public void addTree(String name, double height, double price) {
+	public void addTree(String name, double height, double price) throws Exception {
 
 		Tree tree = new Tree(name, height, price);
-		//productList.add(tree);
 		floristeriaRepository.addProducte(tree);
 		System.out.println("Arbre afegit correctament.");
 
 	}
 
-	public void addFlower(String name, String color, double price) {
+	public void addFlower(String name, String color, double price) throws Exception {
 
 		Flower flower = new Flower(name, color, price);
-		//productList.add(flower);
 		floristeriaRepository.addProducte(flower);
 		System.out.println("Flor afegida correctament.");
 
@@ -52,14 +48,12 @@ public class Floristeria {
 	public void addDecoration(String name, String type, double price) throws Exception {
 
 		Decoration decoration = new Decoration(name, type, price);
-		//productList.add(decoration);
 		floristeriaRepository.addProducte(decoration);
 		System.out.println("Decoració afegida correctament.");
 
 	}
 	
 	public void removeProduct(int id) {
-		//productList.removeIf(p->p.getId()==id);
 		floristeriaRepository.removeProduct(id);
 	}
 	
