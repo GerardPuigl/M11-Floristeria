@@ -9,6 +9,7 @@ public abstract class Producte {
 	
 	public Producte(double price) {
 		id=next_id++;
+		this.price=price;
 	}
 	
 	public double getId() {
