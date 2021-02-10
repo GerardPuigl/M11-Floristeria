@@ -7,7 +7,7 @@ public class Floristeria {
 
 	private String name;
 	
-	private int id=0;
+	private int producte_id=0;
 	
 	private List<Producte> productList = new ArrayList<>();
 	
@@ -16,30 +16,27 @@ public class Floristeria {
 	}
 
 	public void addTree(String name, double height, double price) {
-
-		id++;
 		
-		Tree tree = new Tree(id, name, height, price);
+		Tree tree = new Tree(producte_id++, name, height, price);
 		productList.add(tree);
+		System.out.println("Arbre afegit correctament.");
 
 	}
 
 	public void addFlower(String name, String color, double price) {
 
-		id++;
-
-		Flower flower = new Flower(id, name, color, price);
+		Flower flower = new Flower(producte_id++, name, color, price);
 		productList.add(flower);
+		System.out.println("Flor afegida correctament.");
 
 	}
 
 	public void addDecoration(String name, String type, double price) {
 
-		id++;
-		
 		try {
-			Decoration decoration = new Decoration(id, name, type, price);
+			Decoration decoration = new Decoration(producte_id++, name, type, price);
 			productList.add(decoration);
+			System.out.println("Decoració afegida correctament.");
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage() + "\nDecoració no afegida.");
@@ -61,7 +58,7 @@ public class Floristeria {
 			.filter(p->p.getClass().getSimpleName().equals("Flower"))
 			.forEach(p->System.out.println(p.toString()));
 		
-		System.out.println("DECORACIÓ“:");
+		System.out.println("DECORACIONS“:");
 		
 		productList.stream()
 			.filter(p->p.getClass().getSimpleName().equals("Decoration"))
