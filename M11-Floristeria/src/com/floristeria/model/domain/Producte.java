@@ -12,7 +12,7 @@ public abstract class Producte {
 		this.price=price;
 	}
 	
-	public double getId() {
+	public int getId() {
 		return id;
 	}
 	
