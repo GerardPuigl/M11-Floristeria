@@ -1,36 +1,22 @@
 package com.floristeria.model.domain;
 
-
 public class Decoration extends Producte {
 
-	int id;
 	String name;
 	String type;
-	double price;
-	
+
 	public enum Types {
-		Fusta,Plastic
+		Fusta, Plastic
 	}
 
-	public Decoration(int id, String name, String type, double price) throws Exception {
-		super();
-		this.id = id;
+	public Decoration(String name, String type, double price) throws Exception {
+		super(price);
 		this.name = name;
-		if(	type.equalsIgnoreCase(Types.Fusta.toString())||
-			type.equalsIgnoreCase(Types.Plastic.toString())){
-			this.type = type;
-		}else {
+		if (!type.equalsIgnoreCase(Types.Fusta.toString()) &&
+			!type.equalsIgnoreCase(Types.Plastic.toString())) {
 			throw new Exception("La decoració només pot ser de Fusta o de Plàstic");
-		} 
-		this.price = price;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
+		}
+		this.type = type;
 	}
 
 	public String getName() {
@@ -48,12 +34,10 @@ public class Decoration extends Producte {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "	NOM: " + name + "	TIPUS: " + type + "	PREU: " + price ;
-		
+		return "	ID: " + this.getId() + "	NOM: " + name + "	TIPUS: " + type + "	PREU: " + this.getPrice();
 	}
 
 }
-
