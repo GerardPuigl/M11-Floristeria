@@ -1,5 +1,7 @@
 package com.floristeria.model.domain;
 
+import java.text.Collator;
+
 public class Decoration extends Producte {
 
 	String name;
@@ -8,7 +10,7 @@ public class Decoration extends Producte {
 	public enum Types {
 		Fusta, Plastic
 	}
-
+	
 	public Decoration(String name, String type, double price) throws Exception {
 		super(price);
 		if (name.isBlank()) throw new Exception("Heu d'introduir un nom per la botiga.");
