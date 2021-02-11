@@ -47,7 +47,7 @@ public class Floristeria {
 
 		Decoration decoration = new Decoration(name, type, price);
 		floristeriaRepository.addProducte(decoration);
-		System.out.println("Decoracióafegida correctament.");
+		System.out.println("Decoració afegida correctament.");
 	}
 	
 	public void removeProduct(int id) throws Exception {
