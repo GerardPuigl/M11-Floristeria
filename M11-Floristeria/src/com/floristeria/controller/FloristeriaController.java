@@ -21,7 +21,7 @@ public class FloristeriaController {
 		floristeria.addDecoration(name, type, price);
 	}
 	
-	public void productRemove(Floristeria floristeria, int id) {
+	public void productRemove(Floristeria floristeria, int id) throws Exception {
 		floristeria.removeProduct(id);
 	}
 	
