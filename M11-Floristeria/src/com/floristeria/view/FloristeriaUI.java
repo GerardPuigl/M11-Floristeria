@@ -170,7 +170,13 @@ public class FloristeriaUI {
 			double treePrice = Double.parseDouble(ask("Preu Arbre", "Introdueix el preu de l'arbre"));
 			
 			floristeriaController.treeAdd(floristeria, treeName, treeHeight, treePrice);
-		}catch(Exception e) {
+		}catch(NullPointerException npe) {
+			return;
+		}catch(NumberFormatException nfe) {
+			System.err.println("No s'ha pogut afegir l'arbre");
+			System.err.println("S'ha introduït una paraula enlloc d'un número");
+		}
+		catch(Exception e) {
 			System.err.println("No s'ha pogut afegir l'arbre");
 			System.err.println(e.getMessage());
 		}
@@ -183,7 +189,13 @@ public class FloristeriaUI {
 			double flowerPrice = Double.parseDouble(ask("Preu Flor", "Introdueix el preu de la flor"));
 			
 			floristeriaController.flowerAdd(floristeria, flowerName, flowerColor, flowerPrice);
-		}catch(Exception e) {
+		}catch(NullPointerException npe) {
+			return;
+		}catch(NumberFormatException nfe) {
+			System.err.println("No s'ha pogut afegir la flor");
+			System.err.println("S'ha introduït una paraula enlloc d'un número");
+		}
+		catch(Exception e) {
 			System.err.println("No s'ha pogut afegir la flor");
 			System.err.println(e.getMessage());
 		}
@@ -192,11 +204,17 @@ public class FloristeriaUI {
 	private void askDecorationAdd(Floristeria floristeria) {
 		try {
 			String decorationName = ask("Nom Decoració", "Introdueix el nom de la decoració");
-			String decorationType = ask("Tipus Decoració", "Introdueix el tipus de decoració (Fusta o Plàstic)");
+			String decorationType = ask("Tipus Decoració", "Introdueix el tipus de decoració (fusta o plastic)");
 			double decorationPrice = Double.parseDouble(ask("Preu Decoració", "Introdueix el preu de la decoració"));
 			
 			floristeriaController.decorationAdd(floristeria, decorationName, decorationType, decorationPrice);
-		}catch(Exception e) {
+		}catch(NullPointerException npe) {
+			return;
+		}catch(NumberFormatException nfe) {
+			System.err.println("No s'ha pogut afegir la decoració");
+			System.err.println("S'ha introduït una paraula enlloc d'un número");
+		}
+		catch(Exception e) {
 			System.err.println("No s'ha pogut afegir la decoració");
 			System.err.println(e.getMessage());
 		}
@@ -207,6 +225,11 @@ public class FloristeriaUI {
 			int productId = Integer.parseInt(ask("ID Producte", "Introdueix l'ID del producte a eliminar"));
 			
 			floristeriaController.productRemove(floristeria, productId);
+		}catch(NullPointerException npe) {
+			return;
+		}catch(NumberFormatException nfe) {
+			System.err.println("No s'ha pogut retirar el producte");
+			System.err.println("S'ha introduït una paraula enlloc d'un número");
 		}catch(Exception e) {
 			System.err.println("No s'ha pogut retirar el producte");
 			System.err.println(e.getMessage());
