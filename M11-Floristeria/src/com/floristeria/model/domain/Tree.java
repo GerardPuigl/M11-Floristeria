@@ -5,8 +5,9 @@ public class Tree extends Producte {
 	String name;
 	double hight;
 
-	public Tree(String name, double hight, double price) {
+	public Tree(String name, double hight, double price) throws Exception {
 		super(price);
+		if (name.isBlank()) throw new Exception("Heu d'introduir un nom de l'arbre.");
 		this.name = name;
 		this.hight = hight;
 	}

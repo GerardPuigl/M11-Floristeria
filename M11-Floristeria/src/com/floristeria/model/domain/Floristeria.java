@@ -16,9 +16,7 @@ public class Floristeria {
 	
 	public Floristeria(String name) throws Exception {
 		id = next_id++;
-		if (name.isBlank()) {
-			throw new Exception("Heu d'introduir un nom per la botiga.");
-		}
+		if (name.isBlank()) throw new Exception("Heu d'introduir un nom per la botiga.");
 		this.name = name;
 	}
 	
@@ -52,7 +50,7 @@ public class Floristeria {
 		System.out.println("Decoracióafegida correctament.");
 	}
 	
-	public void removeProduct(int id) {
+	public void removeProduct(int id) throws Exception {
 		floristeriaRepository.removeProduct(id);
 		System.out.println("Producte eliminat correctament.");
 	}
@@ -75,7 +73,6 @@ public class Floristeria {
 		
 		//defineix el títol del llistat en funció del producte
 		String tipus = "";
-
 		switch (product) {
 		case "Tree":
 			tipus = "ARBRES";
@@ -90,7 +87,6 @@ public class Floristeria {
 
 		//imprimeix el llistat
 		System.out.println("TOTAL " + tipus + ": ");
-				
 		floristeriaRepository.getAllProducts().stream()
 			.filter(p->p.getClass().getSimpleName().equals(product))
 			.forEach(p->System.out.println(p.toString()));	
