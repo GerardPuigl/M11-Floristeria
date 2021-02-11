@@ -2,7 +2,19 @@ package com.floristeria.model.domain;
 
 public abstract class Producte {
 
-	double price;
+	private int id;
+	private static int next_id=0;
+	
+	private double price;
+	
+	public Producte(double price) {
+		id=next_id++;
+		this.price=price;
+	}
+	
+	public int getId() {
+		return id;
+	}
 	
 	public double getPrice() {
 		return price;

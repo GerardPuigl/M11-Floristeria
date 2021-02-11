@@ -1,70 +1,123 @@
 package com.floristeria.model.domain;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import com.floristeria.model.service.FloristeriaRepository;
 
 public class Floristeria {
+	
+	private int id;
+	private static int next_id=0;
 
 	private String name;
+
+	private FloristeriaRepository floristeriaRepository=new FloristeriaRepository();
 	
-	private int producte_id=0;
-	
-	private List<Producte> productList = new ArrayList<>();
-	
-	public Floristeria(String name) {
+	public Floristeria(String name) throws Exception {
+		id = next_id++;
+		if (name.isBlank()) throw new Exception("Heu d'introduir un nom per la botiga.");
 		this.name = name;
 	}
-
-	public void addTree(String name, double height, double price) {
+	
+	public int getId() {
+		return id;
+	}	
 		
-		Tree tree = new Tree(producte_id++, name, height, price);
-		productList.add(tree);
-		System.out.println("Arbre afegit correctament.");
+	public String getName() {
+		return name;
+	}	
 
+	public void addTree(String name, double height, double price) throws Exception {
+
+		Tree tree = new Tree(name, height, price);
+		floristeriaRepository.addProducte(tree);
+		System.out.println("Arbre afegit correctament.");
 	}
 
-	public void addFlower(String name, String color, double price) {
+	public void addFlower(String name, String color, double price) throws Exception {
 
-		Flower flower = new Flower(producte_id++, name, color, price);
-		productList.add(flower);
+		Flower flower = new Flower(name, color, price);
+		floristeriaRepository.addProducte(flower);
 		System.out.println("Flor afegida correctament.");
 
 	}
 
-	public void addDecoration(String name, String type, double price) {
+	public void addDecoration(String name, String type, double price) throws Exception {
 
-		try {
-			Decoration decoration = new Decoration(producte_id++, name, type, price);
-			productList.add(decoration);
-			System.out.println("Decoració afegida correctament.");
-
-		} catch (Exception e) {
-			System.out.println(e.getMessage() + "\nDecoració no afegida.");
-		}
-
+		Decoration decoration = new Decoration(name, type, price);
+		floristeriaRepository.addProducte(decoration);
+		System.out.println("Decoració afegida correctament.");
 	}
 	
+	public void removeProduct(int id) throws Exception {
+		floristeriaRepository.removeProduct(id);
+		System.out.println("Producte eliminat correctament.");
+	}
+	
+	//imprimeix tot el stock
 	public void printStock() {
+	
+		//recorre el llistat i caputura una llista dels tipus de Classes que hi ha pressents.
+		List<String> productTypes = floristeriaRepository.getAllProducts()
+				.stream().map(p->p.getClass().getSimpleName())
+				.distinct()
+				.collect(Collectors.toList());
+
+		//imprimeix una llista per cada tipus trobat
+		productTypes.stream().forEach(s->printStock(s));
+	}
+	
+	//imprimeix una llista d'un producte concret	
+	public void printStock(String product) {
 		
-		System.out.println("ARBRES:");
+		//defineix el títol del llistat en funció del producte
+		String tipus = "";
+		switch (product) {
+		case "Tree":
+			tipus = "ARBRES";
+			break;
+		case "Flower":
+			tipus = "FLORS";
+			break;
+		case "Decoration":
+			tipus = "DECORACIONS";
+			break;
+		}
+
+		//imprimeix el llistat
+		System.out.println("TOTAL " + tipus + ": ");
+		floristeriaRepository.getAllProducts().stream()
+			.filter(p->p.getClass().getSimpleName().equals(product))
+			.forEach(p->System.out.println(p.toString()));	
+	}
+	
+	public void stockQuantities() {
 		
+		List<Producte> productList = floristeriaRepository.getAllProducts();
+		
+		System.out.println("TOTAL ARBRES: "+
 		productList.stream()
 			.filter(p->p.getClass().getSimpleName().equals("Tree"))
-			.forEach(p->System.out.println(p.toString()));
-			
-		System.out.println("FLORS:");
+			.count());
 		
+		System.out.println("TOTAL FLORS: "+ 
 		productList.stream()
 			.filter(p->p.getClass().getSimpleName().equals("Flower"))
-			.forEach(p->System.out.println(p.toString()));
+			.count());
 		
-		System.out.println("DECORACIONS“:");
-		
+		System.out.println("TOTAL DECORACIONS: "+
 		productList.stream()
 			.filter(p->p.getClass().getSimpleName().equals("Decoration"))
-			.forEach(p->System.out.println(p.toString()));
-		
+			.count());
 	}
-
-
+	
+	public void totalStockValue() {
+		
+		System.out.println("VALOR TOTAL DEL STOCK: "+
+		
+		floristeriaRepository.getAllProducts().stream()
+			.mapToDouble(p->p.getPrice())
+			.sum());
+	}
 }
