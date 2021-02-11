@@ -5,8 +5,9 @@ public class Flower extends Producte {
 	String name;
 	String color;
 
-	public Flower(String name, String color, double price) {
+	public Flower(String name, String color, double price) throws Exception {
 		super(price);
+		if (name.isBlank()) throw new Exception("Heu d'introduir un nom de la flor.");
 		this.name = name;
 		this.color = color;
 	}

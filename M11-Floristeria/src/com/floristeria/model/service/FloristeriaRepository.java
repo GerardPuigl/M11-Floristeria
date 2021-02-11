@@ -21,8 +21,13 @@ public class FloristeriaRepository {
 			productList.add(producte);
 		}
 
-		public void removeProduct(int id) {
-			productList.removeIf(p->p.getId()==id);
+		public void removeProduct(int id) throws Exception {
+			if (productList.stream().anyMatch(p -> p.getId() == id)) {
+				productList.removeIf(p -> p.getId() == id);
+			} else {
+				throw new Exception("No s'ha trobat cap producte amb aquest id.");
+			}
+			
 		}
 		
 }

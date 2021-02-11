@@ -16,9 +16,7 @@ public class Floristeria {
 	
 	public Floristeria(String name) throws Exception {
 		id = next_id++;
-		if (name.isBlank()) {
-			throw new Exception("Heu d'introduir un nom per la botiga.");
-		}
+		if (name.isBlank()) throw new Exception("Heu d'introduir un nom per la botiga.");
 		this.name = name;
 	}
 	
@@ -35,7 +33,6 @@ public class Floristeria {
 		Tree tree = new Tree(name, height, price);
 		floristeriaRepository.addProducte(tree);
 		System.out.println("Arbre afegit correctament.");
-
 	}
 
 	public void addFlower(String name, String color, double price) throws Exception {
@@ -50,14 +47,15 @@ public class Floristeria {
 
 		Decoration decoration = new Decoration(name, type, price);
 		floristeriaRepository.addProducte(decoration);
-		System.out.println("Decoració afegida correctament.");
-
+		System.out.println("Decoracióafegida correctament.");
 	}
 	
-	public void removeProduct(int id) {
+	public void removeProduct(int id) throws Exception {
 		floristeriaRepository.removeProduct(id);
+		System.out.println("Producte eliminat correctament.");
 	}
 	
+	//imprimeix tot el stock
 	public void printStock() {
 	
 		//recorre el llistat i caputura una llista dels tipus de Classes que hi ha pressents.
@@ -65,10 +63,9 @@ public class Floristeria {
 				.stream().map(p->p.getClass().getSimpleName())
 				.distinct()
 				.collect(Collectors.toList());
-		
+
 		//imprimeix una llista per cada tipus trobat
 		productTypes.stream().forEach(s->printStock(s));
-
 	}
 	
 	//imprimeix una llista d'un producte concret	
@@ -76,7 +73,6 @@ public class Floristeria {
 		
 		//defineix el títol del llistat en funció del producte
 		String tipus = "";
-
 		switch (product) {
 		case "Tree":
 			tipus = "ARBRES";
@@ -91,11 +87,9 @@ public class Floristeria {
 
 		//imprimeix el llistat
 		System.out.println("TOTAL " + tipus + ": ");
-				
 		floristeriaRepository.getAllProducts().stream()
 			.filter(p->p.getClass().getSimpleName().equals(product))
-			.forEach(p->System.out.println(p.toString()));
-			
+			.forEach(p->System.out.println(p.toString()));	
 	}
 	
 	public void stockQuantities() {
@@ -103,19 +97,16 @@ public class Floristeria {
 		List<Producte> productList = floristeriaRepository.getAllProducts();
 		
 		System.out.println("TOTAL ARBRES: "+
-			
 		productList.stream()
 			.filter(p->p.getClass().getSimpleName().equals("Tree"))
 			.count());
 		
 		System.out.println("TOTAL FLORS: "+ 
-		
 		productList.stream()
 			.filter(p->p.getClass().getSimpleName().equals("Flower"))
 			.count());
 		
 		System.out.println("TOTAL DECORACIONS: "+
-		
 		productList.stream()
 			.filter(p->p.getClass().getSimpleName().equals("Decoration"))
 			.count());

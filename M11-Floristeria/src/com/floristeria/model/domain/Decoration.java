@@ -11,6 +11,7 @@ public class Decoration extends Producte {
 
 	public Decoration(String name, String type, double price) throws Exception {
 		super(price);
+		if (name.isBlank()) throw new Exception("Heu d'introduir un nom per la botiga.");
 		this.name = name;
 		if (!type.equalsIgnoreCase(Types.Fusta.toString()) &&
 			!type.equalsIgnoreCase(Types.Plastic.toString())) {
