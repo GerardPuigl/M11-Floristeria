@@ -55,6 +55,10 @@ public class Floristeria {
 		System.out.println("Producte eliminat correctament.");
 	}
 	
+	public List<Producte> getAllProducts(){
+		return floristeriaRepository.getAllProducts();
+	}
+	
 	//imprimeix tot el stock
 	public void printStock() {
 	
@@ -117,7 +121,7 @@ public class Floristeria {
 		System.out.println("VALOR TOTAL DEL STOCK: "+
 		
 		floristeriaRepository.getAllProducts().stream()
-			.mapToDouble(p->p.getPrice())
+			.mapToDouble(Producte::getPrice)
 			.sum());
 	}
 }
