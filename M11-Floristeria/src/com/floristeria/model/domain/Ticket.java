@@ -12,7 +12,8 @@ public class Ticket {
 
 	List<Producte> productList = new ArrayList<>();
 
-	public Ticket(List<Producte> compra) {
+	public Ticket(List<Producte> compra) throws Exception {
+		if(compra.isEmpty())throw new Exception("Heu d'introduir com a mínim un producte per crear un ticket.");
 		id = next_id++;
 		productList = compra;
 		totalValue = compra.stream().mapToDouble((Producte::getPrice)).sum();
