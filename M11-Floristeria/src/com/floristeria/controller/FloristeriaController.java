@@ -1,9 +1,16 @@
 package com.floristeria.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.floristeria.model.domain.Floristeria;
+import com.floristeria.model.domain.Producte;
 
 public class FloristeriaController {
 
+	private TicketRepository ticketRepository = new TicketRepository();
+	
 	public Floristeria createFloristeria(String nomFloristeria) throws Exception {
 		Floristeria floristeria = new Floristeria(nomFloristeria);
 		return floristeria;
@@ -36,4 +43,18 @@ public class FloristeriaController {
 	public void getStockValue(Floristeria floristeria) {
 		floristeria.totalStockValue();
 	}
+	
+	public void createTicket(Floristeria floristeria, List<Integer> idsTicket) {
+		
+		List<Producte> productesTicket  = floristeria.getAllProducts().stream()
+				.filter(prod -> idsTicket.stream()
+						.anyMatch(id -> prod.getId().equals(id)))
+				.collect(Collectors.toList());
+		
+		Ticket ticket = new Ticket(List<Producte> productesTicket);
+		ticketRepository.add(ticket);
+		
+		idsTicket.stream().forEach(id -> floristeria.removeProduct(id));
+	}
+	
 }

@@ -27,8 +27,8 @@ public class FloristeriaUI {
 			String option = ask("Menú", "Tria una opció:"
 														+ "\n1. Afegir producte"
 														+ "\n2. Retirar producte"
-														+ "\n3. Veure stock dels productes"
-														+ "\n4. Veure el valor total dels productes"
+														+ "\n3. Gestió de productes"
+														+ "\n4. Gestió de compres"
 														+ "\n5. Sortir");
 
 			if(option == null) {
@@ -43,7 +43,7 @@ public class FloristeriaUI {
 				menuStock(floristeria);
 				exit = false;
 			}else if(option.equals("4")) {
-				floristeriaController.getStockValue(floristeria);
+				
 				exit = false;
 			}else if(option.equals("5")) {
 				exit = true;
@@ -110,7 +110,7 @@ public class FloristeriaUI {
 			}
 		}while(!exit);
 	}
-	// Menú per veure l'stock dels productes
+	// Menú per veure l'stock i valor dels productes
 	private void menuStock(Floristeria floristeria) {
 
 		boolean exit = false;
@@ -121,10 +121,11 @@ public class FloristeriaUI {
 														+ "\n2. Veure stock de flors"
 														+ "\n3. Veure stock de decoració"
 														+ "\n4. Veure stock de tots els productes"
-														+ "\n5. Sortir");
+														+ "\n5. Veure el valor de tots els productes"
+														+ "\n6. Sortir");
 			
 			if(option == null) {
-					exit = true;
+				exit = true;
 			}else if(option.equals("1")) {
 				floristeriaController.getProductStock(floristeria, "Tree");
 				exit = false;
@@ -138,6 +139,37 @@ public class FloristeriaUI {
 				floristeriaController.getAllProductsStock(floristeria);
 				exit = false;
 			}else if(option.equals("5")) {
+				floristeriaController.getStockValue(floristeria);
+				exit = false;
+			}else if(option.equals("6")) {
+				exit = true;
+			}
+		}while(!exit);
+	}
+	// Menú per crear i veure tickets 
+	private void menuTicket(Floristeria floristeria) {
+		
+		boolean exit = false;
+		
+		do {
+			String option = ask("Menú", "Tria una opció:"
+														+ "\n1. Crear un nou ticket de compra"
+														+ "\n2. Veure els tickets de compra antics"
+														+ "\n3. Veure el valor de les ventes realitzades"
+														+ "\n4. Sortir");
+			
+			if(option == null) {
+				exit = true;
+			}else if(option.equals("1")) {
+				
+				exit = false;
+			}else if(option.equals("2")) {
+				
+				exit = false;
+			}else if(option.equals("3")) {
+				
+				exit = false;
+			}else if(option.equals("4")) {
 				exit = true;
 			}
 		}while(!exit);
