@@ -13,7 +13,7 @@ public class Ticket {
 
 	List<Producte> productList = new ArrayList<>();
 
-	DateTimeFormatter format = DateTimeFormatter.ofPattern("'Data:' dd/MM/yyyy	'Hora:' HH:mm:ss");
+	DateTimeFormatter format = DateTimeFormatter.ofPattern("'DATA:' dd/MM/yyyy	'HORA:' HH:mm");
 
 	public Ticket(List<Producte> compra) throws Exception {
 		if (compra.isEmpty())
@@ -42,7 +42,7 @@ public class Ticket {
 
 	@Override
 	public String toString() {
-		return "Id_Ticket: " + id + "	" + creationDate.format(format) + "	Valor total: " + totalValue;
+		return "ID_TICKET: " + id + "	" + creationDate.format(format) + "	VALOR TOTAL: " + totalValue;
 	}
 
 	public void printTicket() {
