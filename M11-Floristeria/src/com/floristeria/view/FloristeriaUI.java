@@ -1,7 +1,6 @@
 package com.floristeria.view;
 
-import java.util.*;
-import java.util.List;
+import java.util.HashSet;
 
 import javax.swing.JOptionPane;
 
@@ -280,7 +279,7 @@ public class FloristeriaUI {
 	}
 	// Crear ticket
 	private void askCreateTicket(Floristeria floristeria) {
-		List<Integer> idsTicket = new ArrayList<Integer>();
+		HashSet<Integer> idsTicket = new HashSet<Integer>();
 		boolean exit = false;
 		do {
 			try {

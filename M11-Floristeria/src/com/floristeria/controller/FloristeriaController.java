@@ -1,5 +1,6 @@
 package com.floristeria.controller;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,7 +46,7 @@ public class FloristeriaController {
 		floristeria.totalStockValue();
 	}
 	
-	public void createTicket(Floristeria floristeria, List<Integer> idsTicket) throws Exception {
+	public void createTicket(Floristeria floristeria, HashSet<Integer> idsTicket) throws Exception {
 		
 		List<Producte> productesTicket  = floristeria.getAllProducts().stream()
 				.filter(prod -> idsTicket.stream()
