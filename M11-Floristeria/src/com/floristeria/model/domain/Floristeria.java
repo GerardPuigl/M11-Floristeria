@@ -52,7 +52,6 @@ public class Floristeria {
 	
 	public void removeProduct(int id) throws Exception {
 		floristeriaRepository.removeProduct(id);
-		System.out.println("Producte eliminat correctament.");
 	}
 	
 	public List<Producte> getAllProducts(){
