@@ -10,10 +10,8 @@ public class Ticket {
 	private static int next_id = 0;
 	private LocalDateTime creationDate;
 	private double totalValue;
-
-	List<Producte> productList = new ArrayList<>();
-
-	DateTimeFormatter format = DateTimeFormatter.ofPattern("'DATA:' dd/MM/yyyy	'HORA:' HH:mm");
+	private List<Producte> productList = new ArrayList<>();
+	private DateTimeFormatter format = DateTimeFormatter.ofPattern("'DATA:' dd/MM/yyyy	'HORA:' HH:mm");
 
 	public Ticket(List<Producte> compra) throws Exception {
 		if (compra.isEmpty())
