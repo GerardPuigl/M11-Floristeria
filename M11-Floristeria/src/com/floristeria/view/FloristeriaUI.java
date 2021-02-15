@@ -280,7 +280,7 @@ public class FloristeriaUI {
 	}
 	// Crear ticket
 	private void askCreateTicket(Floristeria floristeria) {
-		List<Integer> idsTicket = new ArrayList<Integer>();
+		HashSet<Integer> idsTicket = new HashSet<Integer>();
 		boolean exit = false;
 		do {
 			try {
