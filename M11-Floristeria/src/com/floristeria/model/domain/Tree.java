@@ -2,8 +2,8 @@ package com.floristeria.model.domain;
 
 public class Tree extends Producte {
 
-	String name;
-	double hight;
+	private String name;
+	private double hight;
 
 	public Tree(String name, double hight, double price) throws Exception {
 		super(price);
