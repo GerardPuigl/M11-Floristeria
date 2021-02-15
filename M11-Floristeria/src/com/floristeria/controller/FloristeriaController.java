@@ -54,6 +54,7 @@ public class FloristeriaController {
 		
 		Ticket ticket = new Ticket(productesTicket);
 		ticketRepository.addTicket(ticket);
+		ticket.printTicket();
 		
 		idsTicket.stream().forEach(id -> {
 			try {
@@ -78,5 +79,16 @@ public class FloristeriaController {
 			.mapToDouble(Ticket::getTotalValue)
 			.sum());
 		
+	}
+	
+	public boolean checkId(Floristeria floristeria, int id) {
+		List<Integer> productesIds = floristeria.getAllProducts().stream()
+				.map(Producte::getId)
+				.collect(Collectors.toList());
+		if(productesIds.contains(id)) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 }
