@@ -267,6 +267,7 @@ public class FloristeriaUI {
 			if(response == null) throw new NullPointerException();
 			int productId = Integer.parseInt(response);
 			floristeriaController.productRemove(floristeria, productId);
+			System.out.println("Producte eliminat correctament.");
 		}catch(NullPointerException npe) {
 			return;
 		}catch(NumberFormatException nfe) {
