@@ -202,6 +202,7 @@ public class FloristeriaUI {
 	private void askTreeAdd(Floristeria floristeria) {
 		try {
 			String treeName = ask("Nom Arbre", "Introduiex el nom de l'arbre");
+			if(treeName == null) throw new NullPointerException();				
 			double treeHeight = Double.parseDouble(ask("Altura Arbre", "Introdueix l'altura de l'arbre"));
 			double treePrice = Double.parseDouble(ask("Preu Arbre", "Introdueix el preu de l'arbre"));
 			
@@ -221,7 +222,9 @@ public class FloristeriaUI {
 	private void askFlowerAdd(Floristeria floristeria) {
 		try {
 			String flowerName = ask("Nom Flor", "Introdueix el nom de la flor");
+			if(flowerName == null) throw new NullPointerException();
 			String flowerColor = ask("Color Flor", "Introdueix el color de la flor");
+			if(flowerColor == null) throw new NullPointerException();
 			double flowerPrice = Double.parseDouble(ask("Preu Flor", "Introdueix el preu de la flor"));
 			
 			floristeriaController.flowerAdd(floristeria, flowerName, flowerColor, flowerPrice);
@@ -240,7 +243,9 @@ public class FloristeriaUI {
 	private void askDecorationAdd(Floristeria floristeria) {
 		try {
 			String decorationName = ask("Nom Decoració", "Introdueix el nom de la decoració");
+			if(decorationName == null) throw new NullPointerException();
 			String decorationType = ask("Tipus Decoració", "Introdueix el tipus de decoració (fusta o plastic)");
+			if(decorationType == null) throw new NullPointerException();
 			double decorationPrice = Double.parseDouble(ask("Preu Decoració", "Introdueix el preu de la decoració"));
 			
 			floristeriaController.decorationAdd(floristeria, decorationName, decorationType, decorationPrice);
