@@ -1,5 +1,8 @@
 package com.floristeria.view;
 
+import java.util.*;
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 import com.floristeria.controller.FloristeriaController;
@@ -43,7 +46,7 @@ public class FloristeriaUI {
 				menuStock(floristeria);
 				exit = false;
 			}else if(option.equals("4")) {
-				
+				menuTicket(floristeria);
 				exit = false;
 			}else if(option.equals("5")) {
 				exit = true;
@@ -161,13 +164,14 @@ public class FloristeriaUI {
 			if(option == null) {
 				exit = true;
 			}else if(option.equals("1")) {
-				
+				floristeriaController.getAllProductsStock(floristeria);
+				askCreateTicket(floristeria);
 				exit = false;
 			}else if(option.equals("2")) {
-				
+				floristeriaController.printAllTickets();
 				exit = false;
 			}else if(option.equals("3")) {
-				
+				floristeriaController.getAllTicketsValue();
 				exit = false;
 			}else if(option.equals("4")) {
 				exit = true;
@@ -254,8 +258,9 @@ public class FloristeriaUI {
 	// Retirar producte
 	private void askProductRemove(Floristeria floristeria) {
 		try {
-			int productId = Integer.parseInt(ask("ID Producte", "Introdueix l'ID del producte a eliminar"));
-			
+			String response = ask("ID Producte", "Introdueix l'ID del producte a eliminar");
+			if(response == null) throw new NullPointerException();
+			int productId = Integer.parseInt(response);
 			floristeriaController.productRemove(floristeria, productId);
 		}catch(NullPointerException npe) {
 			return;
@@ -264,6 +269,43 @@ public class FloristeriaUI {
 			System.err.println("S'ha introduït una paraula enlloc d'un número");
 		}catch(Exception e) {
 			System.err.println("No s'ha pogut retirar el producte");
+			System.err.println(e.getMessage());
+		}
+	}
+	// Crear ticket
+	private void askCreateTicket(Floristeria floristeria) {
+		List<Integer> idsTicket = new ArrayList<Integer>();
+		boolean exit = false;
+		do {
+			try {
+				String response = ask("ID Producte", "Introdueix l'ID del producte a afegir al ticket de compra");
+				if(response == null) throw new NullPointerException();				
+				int productId = Integer.parseInt(response);
+				if(!floristeriaController.checkId(floristeria, productId)) throw new IllegalArgumentException();
+				idsTicket.add(productId);				
+			}catch(NullPointerException npe) {
+				return;
+			}catch(NumberFormatException nfe) {
+				System.err.println("S'ha introduït una paraula enlloc d'un número");
+			}catch(Exception e) {
+				System.err.println("No hi ha cap producte amb aquest ID");
+			}
+			int confirm = JOptionPane.showConfirmDialog(null, "Voleu afegir un altre producte al ticket de compra?");
+			switch(confirm) {
+			case 0:
+				exit = false;
+				break;
+			case 1:
+				exit = true;
+				break;
+			case 2:
+				return;
+			}
+		}while(!exit);
+		try {
+			floristeriaController.createTicket(floristeria, idsTicket);
+		} catch (Exception e) {
+			System.err.println("No s'ha pogut crear el ticket");
 			System.err.println(e.getMessage());
 		}
 	}
