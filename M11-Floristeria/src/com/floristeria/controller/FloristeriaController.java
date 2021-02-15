@@ -1,11 +1,12 @@
 package com.floristeria.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.floristeria.model.domain.Floristeria;
 import com.floristeria.model.domain.Producte;
+import com.floristeria.model.domain.Ticket;
+import com.floristeria.model.service.TicketRepository;
 
 public class FloristeriaController {
 
@@ -44,17 +45,38 @@ public class FloristeriaController {
 		floristeria.totalStockValue();
 	}
 	
-	public void createTicket(Floristeria floristeria, List<Integer> idsTicket) {
+	public void createTicket(Floristeria floristeria, List<Integer> idsTicket) throws Exception {
 		
 		List<Producte> productesTicket  = floristeria.getAllProducts().stream()
 				.filter(prod -> idsTicket.stream()
-						.anyMatch(id -> prod.getId().equals(id)))
+						.anyMatch(id -> prod.getId() == id))
 				.collect(Collectors.toList());
 		
-		Ticket ticket = new Ticket(List<Producte> productesTicket);
-		ticketRepository.add(ticket);
+		Ticket ticket = new Ticket(productesTicket);
+		ticketRepository.addTicket(ticket);
 		
-		idsTicket.stream().forEach(id -> floristeria.removeProduct(id));
+		idsTicket.stream().forEach(id -> {
+			try {
+				floristeria.removeProduct(id);
+			} catch (Exception e) {
+				System.err.println("No s'ha pogut retirar el producte");
+				System.err.println(e.getMessage());
+			}
+		});
 	}
 	
+	public void printAllTickets() {
+		ticketRepository.getAllTickets().stream()
+			.forEach(tic -> tic.printTicket());
+	}
+	
+	public void getAllTicketsValue() {
+		
+		System.out.println("VALOR TOTAL DE VENTES REALITZADES: "+
+				
+		ticketRepository.getAllTickets().stream()
+			.mapToDouble(Ticket::getTotalValue)
+			.sum());
+		
+	}
 }
