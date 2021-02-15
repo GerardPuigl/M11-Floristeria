@@ -2,8 +2,8 @@ package com.floristeria.model.domain;
 
 public class Flower extends Producte {
 
-	String name;
-	String color;
+	private String name;
+	private String color;
 
 	public Flower(String name, String color, double price) throws Exception {
 		super(price);

@@ -52,7 +52,10 @@ public class Floristeria {
 	
 	public void removeProduct(int id) throws Exception {
 		floristeriaRepository.removeProduct(id);
-		System.out.println("Producte eliminat correctament.");
+	}
+	
+	public List<Producte> getAllProducts(){
+		return floristeriaRepository.getAllProducts();
 	}
 	
 	//imprimeix tot el stock
@@ -117,7 +120,7 @@ public class Floristeria {
 		System.out.println("VALOR TOTAL DEL STOCK: "+
 		
 		floristeriaRepository.getAllProducts().stream()
-			.mapToDouble(p->p.getPrice())
+			.mapToDouble(Producte::getPrice)
 			.sum());
 	}
 }

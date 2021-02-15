@@ -4,19 +4,19 @@ import java.text.Collator;
 
 public class Decoration extends Producte {
 
-	String name;
-	String type;
-
-	public enum Types {
-		Fusta, Plastic
-	}
+	private String name;
+	private String type;
+	private Collator comparador= Collator.getInstance();
 	
 	public Decoration(String name, String type, double price) throws Exception {
 		super(price);
 		if (name.isBlank()) throw new Exception("Heu d'introduir un nom per la botiga.");
 		this.name = name;
-		if (!type.equalsIgnoreCase(Types.Fusta.toString()) &&
-			!type.equalsIgnoreCase(Types.Plastic.toString())) {
+		
+		comparador.setStrength(Collator.PRIMARY);
+		
+		if (!comparador.equals(type,"Plàstic") &&
+			!comparador.equals(type, "Fusta")) {
 			throw new Exception("La decoració només pot ser de Fusta o de Plàstic");
 		}
 		this.type = type;
